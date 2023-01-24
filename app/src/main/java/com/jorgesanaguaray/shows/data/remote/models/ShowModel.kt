@@ -1,6 +1,6 @@
 package com.jorgesanaguaray.shows.data.remote.models
 
-data class Show(
+data class ShowModel(
 
     val id: Int,
     val url: String,
