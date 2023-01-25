@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -20,7 +19,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var homeAdapterA: HomeAdapter
+    private lateinit var homeAdapterB: HomeAdapter
+    private lateinit var homeAdapterC: HomeAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -31,7 +32,9 @@ class HomeFragment : Fragment() {
         super.onStart()
 
         homeViewModel = ViewModelProvider(this).get()
-        homeAdapter = HomeAdapter()
+        homeAdapterA = HomeAdapter()
+        homeAdapterB = HomeAdapter()
+        homeAdapterC = HomeAdapter()
 
     }
 
@@ -49,11 +52,41 @@ class HomeFragment : Fragment() {
 
         }
 
-        homeViewModel.error.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        homeViewModel.showsA.observe(viewLifecycleOwner) {
+            homeAdapterA.setShows(it)
+            binding.mRecyclerViewA.adapter = homeAdapterA
         }
 
-        homeViewModel.getShows()
+        homeViewModel.showsB.observe(viewLifecycleOwner) {
+            homeAdapterB.setShows(it)
+            binding.mRecyclerViewB.adapter = homeAdapterB
+        }
+
+        homeViewModel.showsC.observe(viewLifecycleOwner) {
+            homeAdapterC.setShows(it)
+            binding.mRecyclerViewC.adapter = homeAdapterC
+        }
+
+        homeViewModel.error.observe(viewLifecycleOwner) {
+            binding.mError.text = it
+        }
+
+        homeViewModel.nestedScrollVisibility.observe(viewLifecycleOwner) {
+            binding.mNestedScroll.visibility = if (it) View.VISIBLE else View.GONE
+        }
+
+        homeViewModel.cardErrorVisibility.observe(viewLifecycleOwner) {
+            binding.mCardError.visibility = if (it) View.VISIBLE else View.GONE
+        }
+
+        homeViewModel.progressBarVisibility.observe(viewLifecycleOwner) {
+            binding.mProgressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
+
+        binding.mSwipeRefresh.setOnRefreshListener {
+            homeViewModel.getShows()
+            binding.mSwipeRefresh.isRefreshing = false
+        }
 
     }
 
