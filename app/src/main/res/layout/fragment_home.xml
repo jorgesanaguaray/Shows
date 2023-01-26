@@ -140,8 +140,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="3dp"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/recommended_shows"
+                        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/mRecyclerViewA"
