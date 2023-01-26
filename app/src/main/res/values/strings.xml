@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="official_site">Official Site</string>
+    <string name="no_official_site">No official site</string>
     <string name="my_list">My list</string>
     <string name="info">Info</string>
     <string name="recommended_shows">Recommended shows:</string>

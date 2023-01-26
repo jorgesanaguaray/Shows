@@ -1,9 +1,12 @@
 package com.jorgesanaguaray.shows.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -44,24 +47,38 @@ class HomeFragment : Fragment() {
 
         homeViewModel.show.observe(viewLifecycleOwner) {
 
-            binding.mImage.load(it.image?.original) {
-                placeholder(R.drawable.image)
-                error(R.drawable.image)
-                crossfade(true)
-                crossfade(400)
-            }
+            binding.apply {
 
-            when (it.genres?.size) {
+                mImage.load(it.image?.original) {
+                    placeholder(R.drawable.image)
+                    error(R.drawable.image)
+                    crossfade(true)
+                    crossfade(400)
+                }
 
-                1 -> binding.mGenres.text = HtmlCompat.fromHtml(it.genres[0], HtmlCompat.FROM_HTML_MODE_LEGACY)
+                when (it.genres?.size) {
 
-                2 -> binding.mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1], HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    1 -> mGenres.text = HtmlCompat.fromHtml(it.genres[0], HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-                3 -> binding.mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1] + " • " + it.genres[2], HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    2 -> mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1], HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-                4 -> binding.mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1] + " • " + it.genres[2] + " • " + it.genres[3], HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    3 -> mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1] + " • " + it.genres[2], HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-                else -> binding.mGenres.text = " • "
+                    4 -> mGenres.text = HtmlCompat.fromHtml(it.genres[0] + " • " + it.genres[1] + " • " + it.genres[2] + " • " + it.genres[3], HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                    else -> mGenres.text = " • "
+
+                }
+
+                mButtonOfficialSite.setOnClickListener { _->
+
+                    try {
+                        goOfficialSite(it.officialSite!!)
+                    } catch (_: Exception) {
+                        Toast.makeText(context, R.string.no_official_site, Toast.LENGTH_LONG).show()
+                    }
+
+                }
 
             }
 
@@ -108,6 +125,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun goOfficialSite(officialSite: String) {
+        val uri = Uri.parse(officialSite)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 
 }
