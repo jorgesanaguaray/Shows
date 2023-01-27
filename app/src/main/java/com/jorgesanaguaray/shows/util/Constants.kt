@@ -11,6 +11,8 @@ class Constants {
         const val BASE_URL = "https://api.tvmaze.com/"
         const val SHOWS_ENDPOINT = "shows"
 
+        const val DATABASE_NAME = "ShowsDatabase.db"
+
     }
 
 }

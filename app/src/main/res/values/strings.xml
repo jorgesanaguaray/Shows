@@ -5,7 +5,10 @@
     <string name="title_notifications">Notifications</string>
     <string name="official_site">Official Site</string>
     <string name="no_official_site">No official site</string>
-    <string name="my_list">My list</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
     <string name="info">Info</string>
     <string name="recommended_shows">Recommended shows:</string>
+    <string name="show_added_to_my_favorites_list">Show added to my favorites list</string>
+    <string name="show_removed_from_my_favorites_list">Show removed from my favorites list</string>
 </resources>

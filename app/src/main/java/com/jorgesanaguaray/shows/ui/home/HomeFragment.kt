@@ -12,8 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import com.jorgesanaguaray.shows.R
+import com.jorgesanaguaray.shows.data.local.entity.FavoriteEntity
 import com.jorgesanaguaray.shows.databinding.FragmentHomeBinding
+import com.jorgesanaguaray.shows.domain.item.ShowItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,6 +73,8 @@ class HomeFragment : Fragment() {
 
                 }
 
+                mIconAdd.setOnClickListener { _-> insertOrDeleteFavorite(it) }
+
                 mButtonOfficialSite.setOnClickListener { _->
 
                     try {
@@ -81,6 +86,8 @@ class HomeFragment : Fragment() {
                 }
 
             }
+
+            setStateOfShow(it.id)
 
         }
 
@@ -131,6 +138,42 @@ class HomeFragment : Fragment() {
         val uri = Uri.parse(officialSite)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
+    }
+
+    private fun insertOrDeleteFavorite(show: ShowItem) {
+
+        if (isFavorite(show.id)) {
+
+            homeViewModel.deleteFavoriteById(show.id)
+            Snackbar.make(requireView(), R.string.show_removed_from_my_favorites_list, Snackbar.LENGTH_LONG).show()
+
+        } else {
+
+            val favoriteEntity = FavoriteEntity(id = show.id, image = show.image!!.original)
+            homeViewModel.insertFavorite(favoriteEntity)
+            Snackbar.make(requireView(), R.string.show_added_to_my_favorites_list, Snackbar.LENGTH_LONG).show()
+
+        }
+
+        setStateOfShow(show.id)
+
+    }
+
+    private fun setStateOfShow(id: Int) {
+
+        if (isFavorite(id)) {
+            binding.mIconAdd.setImageResource(R.drawable.ic_add_check)
+            binding.mTextAdd.text = resources.getString(R.string.remove)
+        }
+        else {
+            binding.mIconAdd.setImageResource(R.drawable.ic_add)
+            binding.mTextAdd.text = resources.getString(R.string.add)
+        }
+
+    }
+
+    private fun isFavorite(id: Int): Boolean {
+        return homeViewModel.isFavorite(id)
     }
 
 }

@@ -4,13 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jorgesanaguaray.shows.data.local.entity.FavoriteEntity
 import com.jorgesanaguaray.shows.domain.item.ShowItem
+import com.jorgesanaguaray.shows.domain.usecases.DeleteFavoriteByIdUseCase
+import com.jorgesanaguaray.shows.domain.usecases.InsertFavoriteUseCase
+import com.jorgesanaguaray.shows.domain.usecases.IsFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(
+
+    private val homeRepository: HomeRepository,
+    private val insertFavoriteUseCase: InsertFavoriteUseCase,
+    private val deleteFavoriteByIdUseCase: DeleteFavoriteByIdUseCase,
+    private val isFavoriteUseCase: IsFavoriteUseCase
+
+) : ViewModel() {
 
     private val _show = MutableLiveData<ShowItem>()
     val show: LiveData<ShowItem> get() = _show
@@ -62,6 +73,34 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
             }
 
         }
+
+    }
+
+    fun insertFavorite(favoriteEntity: FavoriteEntity) {
+
+        viewModelScope.launch {
+            insertFavoriteUseCase(favoriteEntity)
+        }
+
+    }
+
+    fun deleteFavoriteById(id: Int) {
+
+        viewModelScope.launch {
+            deleteFavoriteByIdUseCase(id)
+        }
+
+    }
+
+    fun isFavorite(id: Int): Boolean {
+
+        var result = false
+
+        viewModelScope.launch {
+            result = isFavoriteUseCase(id)
+        }
+
+        return result
 
     }
 
