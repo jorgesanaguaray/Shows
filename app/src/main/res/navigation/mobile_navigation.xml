@@ -17,10 +17,4 @@
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorite"/>
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.jorgesanaguaray.shows.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications"/>
-
 </navigation>
