@@ -9,7 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import com.google.android.material.snackbar.Snackbar
 import com.jorgesanaguaray.shows.R
+import com.jorgesanaguaray.shows.data.local.entity.FavoriteEntity
 import com.jorgesanaguaray.shows.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +33,11 @@ class FavoriteFragment : Fragment() {
         super.onStart()
 
         favoriteViewModel = ViewModelProvider(this).get()
-        favoriteAdapter = FavoriteAdapter()
+        favoriteAdapter = FavoriteAdapter(
+            favoriteViewModel = favoriteViewModel,
+            itemPosition = { favoriteAdapter.notifyItemChanged(it) },
+            onAddClick = { insertOrDeleteFavorite(it) }
+        )
 
     }
 
@@ -84,6 +90,27 @@ class FavoriteFragment : Fragment() {
         builder.setCancelable(false)
         builder.create().show()
 
+    }
+
+    private fun insertOrDeleteFavorite(favorite: FavoriteEntity) {
+
+        if (isFavorite(favorite.id)) {
+
+            favoriteViewModel.deleteFavoriteById(favorite.id)
+            Snackbar.make(requireView(), R.string.show_removed_from_my_favorites_list, Snackbar.LENGTH_LONG).show()
+
+        } else {
+
+            val favoriteEntity = FavoriteEntity(id = favorite.id, image = favorite.image)
+            favoriteViewModel.insertFavorite(favoriteEntity)
+            Snackbar.make(requireView(), R.string.show_added_to_my_favorites_list, Snackbar.LENGTH_LONG).show()
+
+        }
+
+    }
+
+    private fun isFavorite(id: Int): Boolean {
+        return favoriteViewModel.isFavorite(id)
     }
 
 }

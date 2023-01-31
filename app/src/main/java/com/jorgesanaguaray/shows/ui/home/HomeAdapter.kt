@@ -12,7 +12,13 @@ import com.jorgesanaguaray.shows.domain.item.ShowItem
  * Created by Jorge Sanaguaray
  */
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyHomeViewHolder>() {
+class HomeAdapter(
+
+    private val homeViewModel: HomeViewModel,
+    private val itemPosition: (Int) -> Unit,
+    private val onAddClick: (ShowItem) -> Unit
+
+) : RecyclerView.Adapter<HomeAdapter.MyHomeViewHolder>() {
 
     private var shows: List<ShowItem> = ArrayList()
 
@@ -32,8 +38,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyHomeViewHolder>() {
                 crossfade(true)
                 crossfade(400)
             }
+            mIconAdd.setOnClickListener { itemPosition(position) ; onAddClick(show) }
 
         }
+
+        setStateOfShow(show.id, holder.binding)
 
     }
 
@@ -45,6 +54,16 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyHomeViewHolder>() {
 
     fun setShows(shows: List<ShowItem>) {
         this.shows = shows
+    }
+
+    private fun setStateOfShow(id: Int, binding: ItemHomeBinding) {
+
+        if (homeViewModel.isFavorite(id)) {
+            binding.mIconAdd.setImageResource(R.drawable.ic_check)
+        } else {
+            binding.mIconAdd.setImageResource(R.drawable.ic_add)
+        }
+
     }
 
 }

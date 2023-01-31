@@ -12,7 +12,13 @@ import com.jorgesanaguaray.shows.databinding.ItemFavoriteBinding
  * Created by Jorge Sanaguaray
  */
 
-class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MyFavoriteViewHolder>() {
+class FavoriteAdapter(
+
+    private val favoriteViewModel: FavoriteViewModel,
+    private val itemPosition: (Int) -> Unit,
+    private val onAddClick: (FavoriteEntity) -> Unit
+
+) : RecyclerView.Adapter<FavoriteAdapter.MyFavoriteViewHolder>() {
 
     private var shows: List<FavoriteEntity> = ArrayList()
 
@@ -32,8 +38,11 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MyFavoriteViewHolde
                 crossfade(true)
                 crossfade(400)
             }
+            mIconAdd.setOnClickListener { itemPosition(position) ; onAddClick(show) }
 
         }
+
+        setStateOfShow(show.id, holder.binding)
 
     }
 
@@ -45,6 +54,16 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.MyFavoriteViewHolde
 
     fun setShows(shows: List<FavoriteEntity>) {
         this.shows = shows
+    }
+
+    private fun setStateOfShow(id: Int, binding: ItemFavoriteBinding) {
+
+        if (favoriteViewModel.isFavorite(id)) {
+            binding.mIconAdd.setImageResource(R.drawable.ic_check)
+        } else {
+            binding.mIconAdd.setImageResource(R.drawable.ic_add)
+        }
+
     }
 
 }

@@ -39,9 +39,21 @@ class HomeFragment : Fragment() {
         super.onStart()
 
         homeViewModel = ViewModelProvider(this).get()
-        homeAdapterA = HomeAdapter()
-        homeAdapterB = HomeAdapter()
-        homeAdapterC = HomeAdapter()
+        homeAdapterA = HomeAdapter(
+            homeViewModel = homeViewModel,
+            itemPosition = { homeAdapterA.notifyItemChanged(it) },
+            onAddClick = { insertOrDeleteFavorite(it) }
+        )
+        homeAdapterB = HomeAdapter(
+            homeViewModel = homeViewModel,
+            itemPosition = { homeAdapterB.notifyItemChanged(it) },
+            onAddClick = { insertOrDeleteFavorite(it) }
+        )
+        homeAdapterC = HomeAdapter(
+            homeViewModel = homeViewModel,
+            itemPosition = { homeAdapterC.notifyItemChanged(it) },
+            onAddClick = { insertOrDeleteFavorite(it) }
+        )
 
     }
 
@@ -162,7 +174,7 @@ class HomeFragment : Fragment() {
     private fun setStateOfShow(id: Int) {
 
         if (isFavorite(id)) {
-            binding.mIconAdd.setImageResource(R.drawable.ic_add_check)
+            binding.mIconAdd.setImageResource(R.drawable.ic_check)
             binding.mTextAdd.text = resources.getString(R.string.remove)
         }
         else {
