@@ -26,8 +26,8 @@
         android:layout_margin="2dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_add"
-        app:tintMode="@color/white"
         app:fabSize="mini"
+        app:tintMode="@color/white"
         app:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

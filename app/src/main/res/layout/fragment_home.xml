@@ -54,85 +54,26 @@
                         android:padding="20dp"
                         app:layout_constraintBottom_toBottomOf="parent">
 
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/mIconAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/ic_add"
+                            app:fabSize="mini"
+                            app:tintMode="@color/white"
+                            app:backgroundTint="@color/purple_500"/>
+
                         <TextView
                             android:id="@+id/mGenres"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@android:color/white"
                             tools:text="Genres"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="10dp">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:id="@+id/mIconAdd"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/ic_add"/>
-
-                                <TextView
-                                    android:id="@+id/mTextAdd"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    android:textColor="@android:color/white"
-                                    android:text="@string/add"/>
-
-                            </LinearLayout>
-
-                            <Button
-                                android:id="@+id/mButtonOfficialSite"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:backgroundTint="@android:color/white"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-                                android:textColor="@android:color/black"
-                                android:textStyle="bold"
-                                android:text="@string/official_site"/>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:id="@+id/mDetail"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/ic_info"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    android:textColor="@android:color/white"
-                                    android:text="@string/info"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -225,7 +166,7 @@
         android:id="@+id/mProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

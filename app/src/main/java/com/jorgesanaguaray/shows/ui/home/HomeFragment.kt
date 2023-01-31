@@ -1,12 +1,9 @@
 package com.jorgesanaguaray.shows.ui.home
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -87,16 +84,6 @@ class HomeFragment : Fragment() {
 
                 mIconAdd.setOnClickListener { _-> insertOrDeleteFavorite(it) }
 
-                mButtonOfficialSite.setOnClickListener { _->
-
-                    try {
-                        goOfficialSite(it.officialSite!!)
-                    } catch (_: Exception) {
-                        Toast.makeText(context, R.string.no_official_site, Toast.LENGTH_LONG).show()
-                    }
-
-                }
-
             }
 
             setStateOfShow(it.id)
@@ -146,12 +133,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun goOfficialSite(officialSite: String) {
-        val uri = Uri.parse(officialSite)
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        startActivity(intent)
-    }
-
     private fun insertOrDeleteFavorite(show: ShowItem) {
 
         if (isFavorite(show.id)) {
@@ -175,11 +156,9 @@ class HomeFragment : Fragment() {
 
         if (isFavorite(id)) {
             binding.mIconAdd.setImageResource(R.drawable.ic_check)
-            binding.mTextAdd.text = resources.getString(R.string.remove)
         }
         else {
             binding.mIconAdd.setImageResource(R.drawable.ic_add)
-            binding.mTextAdd.text = resources.getString(R.string.add)
         }
 
     }
