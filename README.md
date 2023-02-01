@@ -30,18 +30,9 @@ Android app that consumes a shows API and allows you to save your favorite shows
 
 ## Screenshots
 
-<p align = "center" >
-
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QuRkXkAA41zB?format=jpg&name=4096x4096>
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QuRlWIAAilKR?format=jpg&name=4096x4096>
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QuRiXoAAKMG0?format=jpg&name=4096x4096>
-
-</p>
-
-<p align = "center" >
-
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QyfnXwAIo3Of?format=jpg&name=4096x4096>
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QygJWAAM9zDc?format=jpg&name=4096x4096>
-  <img width="225px" src=https://pbs.twimg.com/media/Fn2QyghWQAEJo-0?format=jpg&name=4096x4096>
-
-</p>
+![1](https://user-images.githubusercontent.com/115268191/215933140-10d87ed8-80b7-41ef-b24c-2aa42576d4ff.png)
+![2](https://user-images.githubusercontent.com/115268191/215933142-15a3e10f-1eed-4765-a882-bf1aa5d657f9.png)
+![3](https://user-images.githubusercontent.com/115268191/215933145-4eb35be0-f042-4d42-9703-0d92deec443b.png)
+![4](https://user-images.githubusercontent.com/115268191/215933146-5bf2c5f9-a933-4149-a7b3-1f95145ec35a.png)
+![5](https://user-images.githubusercontent.com/115268191/215933148-64ee0fe9-97b1-48d5-ab03-8010801f6748.png)
+![6](https://user-images.githubusercontent.com/115268191/215933149-f94c6048-a7f1-4698-8d35-510383d7a4e6.png)
